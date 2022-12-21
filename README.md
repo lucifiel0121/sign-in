@@ -2,27 +2,26 @@
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
-## What's next? How do I make an app with this?
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+# 簽到app
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+要求：
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+1. 可以註冊使用者
+  - 記一個表顯示註冊資料
+2. 可以登錄
+  - 查註冊使用者的表
+3. 點選簽到按鈕，可以記錄簽到時間，地點。簽到需要限制一天早上，中午，晚上個時間段，分別只允許一次簽到。
+4. 使用者，簽到時間等相關資料可以通過【react-native-local-mongodb】等管理。
+5. 可以查看簽到的統計結果。
 
-## Learn More
+6. 可以對應（Android,iOS）手機，平板。
+   - RWD
+7. 1到5沒有提到的功能可以自由發揮。
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+# Tech stack
+Frontend
+- react + react hooks + typescript + ant design
+- react + next.js + typescript + tailwind css
