@@ -1,4 +1,7 @@
-export const STORAGE_KEY = "USER_STORAGE_KEY";
+import type { State } from "./useTime";
+
+export const USER_STORAGE_KEY = "USER_STORAGE_KEY";
+export const SIGNIN_STORAGE_KEY = "SIGNIN_STORAGE_KEY";
 
 interface IUser {
   username: string;
@@ -6,10 +9,10 @@ interface IUser {
 }
 
 export default function useLocalStorage({
-  key = STORAGE_KEY,
+  key,
   initialValue = null,
 }: {
-  key?: string;
+  key: string;
   initialValue?: string | null;
 }) {
   const getLocalStorageValue = () => {
@@ -50,8 +53,14 @@ export default function useLocalStorage({
     const value = JSON.parse(getLocalStorageValue()) || [];
     const storage = [...value, user];
     setLocalStorageValue(JSON.stringify(storage));
-    console.log("註冊成功！");
   };
 
-  return { findUser, insertUser, authUser };
+  const saveSignInState = (state: State) => {
+    const value = JSON.parse(getLocalStorageValue()) || [];
+    const storage = [...value, state];
+    setLocalStorageValue(JSON.stringify(storage));
+    console.log("已簽到");
+  };
+
+  return { findUser, insertUser, authUser, saveSignInState };
 }
