@@ -3,6 +3,20 @@
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
 - react + react hooks + typescript + next.js + typescript + tailwind css
+- add `use-context-selector` for better useContext
+- add useReducer for control login state (use Redux when needed)
+- add root context for login state (track in localstorage/cookie if large system)
+
+登入 Login / 註冊 Register
+
+- base input
+- simple hint text
+- clear after actions
+- 登入相關資料記在 local storage
+
+導覽列 Nav
+
+- nav can route to different page
 
 # 簽到 app
 
