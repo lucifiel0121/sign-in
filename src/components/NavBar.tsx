@@ -16,7 +16,7 @@ const NavBar = () => {
           href="/"
           className="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
         >
-          打卡 {String(isLogin)}
+          打卡
         </Link>
         <button
           data-collapse-toggle="navbar-default"

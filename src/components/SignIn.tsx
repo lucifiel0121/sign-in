@@ -35,7 +35,7 @@ const SignIn = () => {
    *               |-----------|-----------|------------|----------|-------->
    * range         |  無效打卡   |   上午    |    中午     |    晚上   |  無效打卡
    */
-  const checkTimeDisplay = (time = new Date("2021-12-23T18:24:43.391Z")) => {
+  const checkTimeDisplay = (time = new Date()) => {
     const hours = time.getHours();
     if (hours < TimeConfig.dayBegin)
       dispatch({ type: "invalid", time: time, signState: signState });
@@ -49,7 +49,7 @@ const SignIn = () => {
       dispatch({ type: "invalid", time: time, signState: signState });
   };
   useEffect(() => {
-    // checkTimeDisplay();
+    checkTimeDisplay();
   }, []);
 
   return (
