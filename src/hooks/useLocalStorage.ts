@@ -61,6 +61,9 @@ export default function useLocalStorage({
     setLocalStorageValue(JSON.stringify(storage));
     console.log("已簽到");
   };
+  const getValue = () => {
+    return JSON.parse(getLocalStorageValue()) || [];
+  };
 
-  return { findUser, insertUser, authUser, saveSignInState };
+  return { findUser, insertUser, authUser, saveSignInState, getValue };
 }
