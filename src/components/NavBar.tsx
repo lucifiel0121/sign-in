@@ -35,7 +35,7 @@ const NavBar = () => {
         <div
           className={`${
             ariaExpanded ? "" : "hidden"
-          } absolute top-9 left-0 w-full md:block md:w-auto`}
+          } w-full max-[768px]:absolute max-[768px]:top-9 max-[768px]:left-0 md:block md:w-auto `}
           id="navbar-default"
           onClick={() => setAriaExpanded(false)}
         >
