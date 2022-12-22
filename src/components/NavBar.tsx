@@ -1,14 +1,23 @@
 import Link from "next/link";
 import { useState } from "react";
+import RootContext from "../../context/rootContext";
+import { useContextSelector } from "use-context-selector";
+import { updateIsLogin } from "../../context/auth/action";
 
 const NavBar = () => {
+  const { isLogin } = useContextSelector(RootContext, (value) => value[0]);
+  const rootDispatch = useContextSelector(RootContext, (value) => value[1]);
+
   const [ariaExpanded, setAriaExpanded] = useState(false);
   return (
     <nav className="border-gray-200 bg-white px-2 py-2.5 dark:bg-gray-900 sm:px-4">
       <div className="container mx-auto flex flex-wrap items-center justify-between">
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          打卡
-        </span>
+        <Link
+          href="/"
+          className="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
+        >
+          打卡 {String(isLogin)}
+        </Link>
         <button
           data-collapse-toggle="navbar-default"
           type="button"
@@ -26,9 +35,9 @@ const NavBar = () => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-              clip-rule="evenodd"
+              clipRule="evenodd"
             ></path>
           </svg>
         </button>
@@ -49,22 +58,36 @@ const NavBar = () => {
                 首頁
               </Link>
             </li>
-            <li>
-              <Link
-                href="/register"
-                className="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
-              >
-                註冊
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/login"
-                className="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
-              >
-                登入
-              </Link>
-            </li>
+
+            {isLogin ? (
+              <li>
+                <button
+                  className="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
+                  onClick={() => rootDispatch(updateIsLogin(false))}
+                >
+                  登出
+                </button>
+              </li>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    href="/register"
+                    className="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
+                  >
+                    註冊
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/login"
+                    className="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
+                  >
+                    登入
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

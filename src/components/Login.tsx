@@ -1,22 +1,31 @@
 import { useState } from "react";
-import useLocalStorage from "../hooks/useLocalStorage";
+import useLocalStorage, { USER_STORAGE_KEY } from "../hooks/useLocalStorage";
+import { useRouter } from "next/router";
+import { useContextSelector } from "use-context-selector";
+import RootContext from "../../context/rootContext";
+import { updateIsLogin } from "../../context/auth/action";
 
 const Login = () => {
-  const { authUser } = useLocalStorage({});
+  const router = useRouter();
+  const rootDispatch = useContextSelector(RootContext, (v) => v[1]);
+
+  const { authUser } = useLocalStorage({ key: USER_STORAGE_KEY });
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const [hint, setHint] = useState("");
   const handleSubmit = () => {
     // 建立新使用者
     const newUser = {
       username,
       password,
     };
-    console.log("f", authUser(newUser));
     if (authUser(newUser)) {
-      console.log("使用者存在");
+      router.push("/");
+      rootDispatch(updateIsLogin(true));
     } else {
-      console.error("使用者不存在！");
+      setHint("使用者不存在！");
+      setUsername("");
+      setPassword("");
     }
   };
 
@@ -41,6 +50,7 @@ const Login = () => {
             type="password"
           />
         </div>
+        <p className="text-red-700">{hint}</p>
         <div className="flex justify-center">
           <button
             className="w-32 rounded-md bg-black py-1 font-semibold text-white"

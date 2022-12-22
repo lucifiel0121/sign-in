@@ -1,10 +1,11 @@
 import { useState } from "react";
-import useLocalStorage from "../hooks/useLocalStorage";
+import useLocalStorage, { USER_STORAGE_KEY } from "../hooks/useLocalStorage";
 
 const Register = () => {
-  const { findUser, insertUser } = useLocalStorage({});
+  const { findUser, insertUser } = useLocalStorage({ key: USER_STORAGE_KEY });
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [hint, setHint] = useState("");
 
   const handleSubmit = () => {
     // 建立新使用者
@@ -14,8 +15,13 @@ const Register = () => {
     };
     if (!findUser(username)) {
       insertUser(newUser);
+      setHint("已經新增完成");
+      setUsername("");
+      setPassword("");
     } else {
-      console.error("使用者已經存在！！");
+      setHint("使用者已經存在！");
+      setUsername("");
+      setPassword("");
     }
   };
 
@@ -40,6 +46,7 @@ const Register = () => {
             type="password"
           />
         </div>
+        <p className="text-red-700">{hint}</p>
         <div className="flex justify-center">
           <button
             className="w-32 rounded-md bg-black py-1 font-semibold text-white"
