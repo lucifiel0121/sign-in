@@ -55,7 +55,7 @@ const Calc = () => {
                         minute: "numeric",
                         second: "numeric",
                         hour12: false,
-                      }).format(item.time)
+                      }).format(new Date(item.time))
                     : ""}
                 </td>
               </tr>
